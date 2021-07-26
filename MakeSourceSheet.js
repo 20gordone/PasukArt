@@ -97,3 +97,30 @@ function stripFormattingWithTypo(source){
     cleanedVerse += "׃";
     return cleanedVerse;
 }
+
+function makeSefariaSheet(){
+    var l2 = document.getElementById("names").value;
+    var lookup = l2.replace(/\s/g, '')
+    var sheettitle = 'TEST: ' + lookup
+    //Assume refs is a correctly formatted array:
+    //
+    text = {
+                'title':sheettitle, 
+                'status':'public', 
+                'options':{"numbered": 1,
+                    "assignable": 0,
+                    "layout": "sideBySide",
+                    "boxed": 0,
+                    "language": "bilingual",
+                    "divineNames": "noSub",
+                    "collaboration": "none",
+                    "highlightMode": 0,
+                    "bsd": 0,
+                    "langLayout": "heRight"
+                },
+                'attribution':'NamePasuk Applet',
+                'sources':{
+                    'ref': refs[0]
+                }
+            }
+}
