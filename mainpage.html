@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html>
+
+        <style>
+            .alignment div {
+                font-size: 25px;
+                display: flex;
+            }
+            .alignment div span {
+                flex: 1;
+            }
+            .alignment div span:first-of-type {
+                text-align: right;
+                padding-right: 0px;
+            }
+
+            .alignment div span:last-of-type {
+                padding-left: 0px;
+            }
+            #myProgress {
+                width: 50%;
+                background-color: grey;
+            }
+            #myBar {
+                width: 0%;
+                height: 30px;
+                background-color: rgb(119, 18, 214);
+            }
+            .lsidebar {
+                height: 100%; /* Full-height: remove this if you want "auto" height */
+                width: 13%;/*250px; /* Set the width of the sidebar */
+                position: fixed; /* Fixed Sidebar (stay in place on scroll) */
+                z-index: 3; /* Stay on top */
+                top: 0; /* Stay at the top */
+                left: 0;
+                background-color: white; /* Black */
+                overflow-x: hidden; /* Disable horizontal scroll */
+            }
+            .rsidebar {
+                height: 100%; /* Full-height: remove this if you want "auto" height */
+                width: 13%; /* Set the width of the sidebar */
+                position: fixed; /* Fixed Sidebar (stay in place on scroll) */
+                z-index: 3; /* Stay on top */
+                top: 0; /* Stay at the top */
+                right: 0;
+                background-color: white; /* Black */
+                overflow-x: hidden; /* Disable horizontal scroll */
+            }
+            .topbar {
+                position: fixed; /* Fixed Sidebar (stay in place on scroll) */
+                z-index: 2; /* Stay on top */
+                margin-top: -10%;
+                margin-left: -5%;
+                height: 19.1%; /*19.1/19.6 */
+                width: 100%;
+                padding: 0px 0px;
+                background-color: white;/* #8D715C; */
+                overflow-x: hidden; /* Disable horizontal scroll */
+            }
+            .lowbar {
+                position: fixed; /* Fixed Sidebar (stay in place on scroll) */
+                z-index: 2; /* Stay on top */
+                margin-left: -5%;
+                height: 9.2%;
+                width: 100%;
+                bottom: 0;
+                padding: 0px 0px;
+                background-color: white;/* #8D715C; */
+                overflow-x: hidden; /* Disable horizontal scroll */
+                text-indent: 5%;
+                color: black;
+            }
+            .main {
+                z-index: 1;
+                margin-left: 14%; /* Same as the width of the sidebar */
+                margin-top: 6%;
+                margin-right: 14%;
+                margin-bottom: 9.2%;
+                height: 100%;
+                padding: 0px 0px;
+                background-color: #8D715C;
+                font-size: 20px;
+                color: gold;
+            }
+            .brownfill{
+                color: gold;
+                background-color: #8C5500;
+            }
+            .smallertext{
+                font-size: 16px;
+            }
+            .accordion {
+                background-color: #A9690C;
+                color: gold;
+                cursor: pointer;
+                padding: 10px;
+                border: none;
+                text-align: center;
+                outline: none;
+                font-size: 15px;
+                transition: 0.4s;
+                width: 19.5%;
+            }
+
+            .active, .accordion:hover {
+                background-color: rgb(167, 101, 3); 
+            }
+
+            .panel {
+                padding: 0 18px;
+                display: none;
+                background-color: rgb(194, 112, 18);
+                overflow: hidden;
+                text-align: left;
+                font-size: 15px;
+            }
+            .lacc{
+                display: inline;
+            }
+            .bb {
+                height: 35px;
+                width: 160px;
+                font-size: 22px;
+            }
+            .introp{
+                float: left;
+                width: 70%;
+            }
+            .sideimage{
+                margin-left: 3%;
+                padding: 10px 20px;
+                float: left;
+                height: auto;
+            }
+            .tbox{
+                height: 35px;
+                width: 200px;
+                font-size: 20px;
+            }
+        </style>
+
+<head>
+    <link rel="icon" type="image/png" href="favicon-32x32.png" sizes="32x32" />
+    <link rel="icon" type="image/png" href="favicon-16x16.png" sizes="16x16" />
+    <meta charset="utf-8"/>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <title>NamePasuk</title>
+</head>
+<div><img src="Testsidebar.png" alt="A Sefaria Applet" width="100%" height="100%" class="lsidebar"></div>
+<div><img src="Rightsidebar.png" alt="A Sefaria Applet" width="100%" height="100%" class="rsidebar"></div>
+<div class="topbar"></div>
+<div class="lowbar">© 2021 Ezra Gordon for <a href="https://www.sefaria.org/?home" target="_blank">Sefaria</a> using the <a href="https://github.com/Sefaria/Sefaria-Project/wiki/API-Documentation" target="_blank">Sefaria API</a>
+</div>
+
+<body class="main">
+Welcome to the Name Pasuk finder! This applet finds biblical verses that start and end with the first and last letters of your name. This is 
+perfect for making personalized Jewish art. If you don't have a hebrew keyboard, you can go to <a href="https://www.branah.com/hebrew" target="_blank">this website</a>. 
+Enter your name or the first and last letters below.
+<br>
+<br>
+<div>
+    <label for="names" style="font-size: 30px;">Hebrew Name/Letters:</label>
+    <input type="text" id="names" name="names" value ="לאה" class="tbox" style="background-color: #A9690C; color: gold;">
+<!--    <br><strong>Choose which books to include: </strong> -->
+
+    <div class="lacc">
+        <button class="accordion" id="Include Torah"><input type="checkbox" id="Wholetorah" onclick="checkTorah()"><span>Search Torah (click to expand)</span></input>
+        <div id="tormenu" class="panel">
+            <strong>Torah: </strong><input type="checkbox" id="Genesis" name="Genesis" value=50 onclick="recollapse(this.parentElement.parentElement.id)">Genesis</input>
+            <input type="checkbox" id="1Exodus" name="Exodus" value=40 onclick="recollapse(this.parentElement.parentElement.id)">Exodus</input>
+            <input type="checkbox" id="1Leviticus" name="Leviticus" value=27 onclick="recollapse(this.parentElement.parentElement.id)">Leviticus</input>
+            <input type="checkbox" id="1Numbers" name="Numbers" value=36 onclick="recollapse(this.parentElement.parentElement.id)">Numbers</input>
+            <input type="checkbox" id="1Deuteronomy" name="Deuteronomy" value=34 onclick="recollapse(this.parentElement.parentElement.id)">Deuteronomy</input>
+        </div>
+    </button>
+    </div>
+<div class="lacc">
+    <button class="accordion" id="Include Prophets">
+    <input type="checkbox" id="Wholeproph" onclick="checkProphets()"><span>Search Prophets (click to expand)</span></input>
+    <div id="promenu" class="panel">
+      <strong>Prophets: </strong> <input type="checkbox" id="1Joshua" name="Joshua" value =24 onclick="recollapse(this.parentElement.parentElement.id)">Joshua</input>
+        <input type="checkbox" id="1Judges" name="Judges" value=21 onclick="recollapse(this.parentElement.parentElement.id)">Judges</input>
+        <input type="checkbox" id="1Samuel I" name="Samuel I" value=31 onclick="recollapse(this.parentElement.parentElement.id)">Samuel I</input>
+        <input type="checkbox" id="1Samuel II" name="Samuel II" value=24 onclick="recollapse(this.parentElement.parentElement.id)">Samuel II</input>
+        <input type="checkbox" id="1Kings I" name="Kings I" value=22 onclick="recollapse(this.parentElement.parentElement.id)">Kings I</input>
+        <input type="checkbox" id="1Kings II" name="Kings II" value=25 onclick="recollapse(this.parentElement.parentElement.id)">Kings II</input>
+        <input type="checkbox" id="1Isaiah" name="Isaiah" value=66 onclick="recollapse(this.parentElement.parentElement.id)">Isaiah</input>
+        <input type="checkbox" id="1Jeremiah" name="Jeremiah" value=52 onclick="recollapse(this.parentElement.parentElement.id)">Jeremiah</input>
+        <input type="checkbox" id="1Ezekiel" name="Ezekiel" value=48 onclick="recollapse(this.parentElement.parentElement.id)">Ezekiel</input>
+        <input type="checkbox" id="1Hosea" name="Hosea" value=14 onclick="recollapse(this.parentElement.parentElement.id)">Hosea</input>
+        <input type="checkbox" id="1Joel" name="Joel" value=3 onclick="recollapse(this.parentElement.parentElement.id)">Joel</input>
+        <input type="checkbox" id="1Amos" name="Amos" value=9 onclick="recollapse(this.parentElement.parentElement.id)">Amos</input>
+        <input type="checkbox" id="1Obadiah" name="Obadiah" value=1 onclick="recollapse(this.parentElement.parentElement.id)">Obadiah</input>
+        <input type="checkbox" id="1Jonah" name="Jonah" value=4 onclick="recollapse(this.parentElement.parentElement.id)">Jonah</input>
+        <input type="checkbox" id="1Micah" name="Micah" value=7 onclick="recollapse(this.parentElement.parentElement.id)">Micah</input>
+        <input type="checkbox" id="1Nahum" name="Nahum" value=3 onclick="recollapse(this.parentElement.parentElement.id)">Nahum</input>
+        <input type="checkbox" id="1Habakkuk" name="Habakkuk" value=3 onclick="recollapse(this.parentElement.parentElement.id)">Habakkuk</input>
+        <input type="checkbox" id="1Zephaniah" name="Zephaniah" value=3 onclick="recollapse(this.parentElement.parentElement.id)">Zephaniah</input>
+        <input type="checkbox" id="1Haggai" name="Haggai" value=2 onclick="recollapse(this.parentElement.parentElement.id)">Haggai</input>
+        <input type="checkbox" id="1Zechariah" name="Zechariah" value=14 onclick="recollapse(this.parentElement.parentElement.id)">Zechariah</input>
+        <input type="checkbox" id="1Malachi" name="Malachi" value=3 onclick="recollapse(this.parentElement.parentElement.id)">Malachi</input>
+    </div>
+</button>
+</div>
+<div class="lacc">
+    <button class="accordion" id="Include Writings"><input type="checkbox" id="Wholewrit" onclick="checkWritings()"><span>Search Writings (click to expand)</span></input>
+    <div id="writmenu" class="panel">
+      <strong>Writings:</strong> <input type="checkbox" id="1Psalms" name="Psalms" value=150 onclick="recollapse(this.parentElement.parentElement.id)">Psalms</input>
+        <input type="checkbox" id="1Proverbs" name="Proverbs" value=31 onclick="recollapse(this.parentElement.parentElement.id)">Proverbs</input>
+        <input type="checkbox" id="1Job" name="Job" value=42 onclick="recollapse(this.parentElement.parentElement.id)">Job</input>
+        <input type="checkbox" id="1SoS" name="Song of Songs" value=8 onclick="recollapse(this.parentElement.parentElement.id)">Song of Songs</input>
+        <input type="checkbox" id="1Ruth" name="Ruth" value=4 onclick="recollapse(this.parentElement.parentElement.id)">Ruth</input>
+        <input type="checkbox" id="1Lamentations" name="Lamentations" value=5 onclick="recollapse(this.parentElement.parentElement.id)">Lamentations</input>
+        <input type="checkbox" id="1Ecclesiastes" name="Ecclesiastes" value=12 onclick="recollapse(this.parentElement.parentElement.id)">Ecclesiastes</input>
+        <input type="checkbox" id="1Esther" name="Esther" value=10 onclick="recollapse(this.parentElement.parentElement.id)">Esther</input>
+        <input type="checkbox" id="1Daniel" name="Daniel" value=12 onclick="recollapse(this.parentElement.parentElement.id)">Daniel</input>
+        <input type="checkbox" id="1Ezra" name="Ezra" value=10 onclick="recollapse(this.parentElement.parentElement.id)">Ezra</input>
+        <input type="checkbox" id="1Nehemiah" name="Nehemiah" value=13 onclick="recollapse(this.parentElement.parentElement.id)">Nehemiah</input>
+        <input type="checkbox" id="1Chronicles I" name="Chronicles I" value=29 onclick="recollapse(this.parentElement.parentElement.id)">Chronicles I</input>
+        <input type="checkbox" id="1Chronicles II" name="Chronicles II" value=36 onclick="recollapse(this.parentElement.parentElement.id)">Chronicles II</input>
+    </div>
+    </button>
+</div>
+</div>
+<div class="smallertext">
+    <button id="save" class="brownfill bb">Search Verses</button><p id = "searching"></p>
+    <div id="loadbar"></div>
+    <div id="vary">
+    </div>
+    <div id="artProduct" class="alignment">
+</div>
+<script type="text/javascript" src="html2canvas.min.js"></script>
+
+<div id="aPButtons" style="text-align: center;"></div>
+<br><br><br><br><br>
+<div id="includePA" style="bottom: 0px;">
+Advanced Options:<br>
+Try including Pirkei Avot: <input type="checkbox" id="1Pirkei Avot" name="Pirkei Avot" value=6><br>
+</div>
+<script src="NamePasuk.js"></script>
+<script src="AccordianManagement.js"></script>
+<script src="RankResults.js"></script>
+<script src="MakeSourceSheet.js"></script>
+</div>
+
+    <div class="summary">
+        
+    </div>
+    <div style="clear:both;"></div>
+    <br>
+
+</body>
+<!--© 2021 Ezra Gordon.-->
+</html>
