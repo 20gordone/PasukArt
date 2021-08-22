@@ -21,7 +21,11 @@ function hebTest(l2, perek, book, fillVal){
         if (Number(widthString.substring(0,widthString.length-1))+fillVal>99){
             setTimeout(() => { resetbar(); }, 500);
         }
-    });
+    })
+    .fail(function() {
+        alert( "An error occurred while searching, please reload the page to try again" );
+      })
+      ;
 }
 
 function isValid(str1, verse){
@@ -64,11 +68,11 @@ function resultreaction(){
         var psukim = document.getElementById("versesdropdown");
         var resultCount = psukim.children.length;
         if (resultCount == 1) {
-            item.innerHTML += "<br> <p id=\"countresults\"> Sorry, there was only one result. I hope it's a good one! Mouse over it to see the full translation.</p>"
+            item.innerHTML += "<br> <p id=\"countresults\"> Sorry, there was only one result. I hope it's a good one! It should appear below shortly.</p>"
 //            document.getElementById("versesdropdown").title = document.getElementById("versesdropdown").children[0].title
         }
         if (resultCount > 1){
-            item.innerHTML += "<p id=\"countresults\"> There were a whopping " + String(resultCount) + " results! Yay! Mouse over options in the dropdown to see the full translation.</p>"
+            item.innerHTML += "<p id=\"countresults\"> There were a whopping " + String(resultCount) + " results! Yay! The text should appear below shortly.</p>"
             orderResultsByLinkCount();
         }
     }
@@ -78,6 +82,7 @@ function resultreaction(){
 
 }
 
+document.getElementById("postToSefaria").style.display = "none";
 document.getElementById("vary").style.display = "block";
 document.getElementById('save').addEventListener('click', nameSearch);
 
@@ -130,7 +135,7 @@ function nameSearch(){
         return;
     }
     //Set up search bar
-    document.getElementById("vary").innerHTML ="<label for=\"versesdropdown\"><i>Search results:</i></label><select id=\"versesdropdown\" class=\"brownfill\"></select>"
+    document.getElementById("vary").innerHTML ="<label for=\"versesdropdown\"><i>Search results:</i></label><select id=\"versesdropdown\" class=\"brownfill\" style = \"display: none;\"></select>"
     document.getElementById("searching").textContent = "Searching..."
     document.getElementById("loadbar").innerHTML = "<div id=\"myProgress\"><div id=\"myBar\"></div></div>"
     currentdropdown = document.getElementById('tormenu').children;

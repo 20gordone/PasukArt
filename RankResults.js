@@ -1,4 +1,6 @@
 var numFound = 0;
+
+//Called third
 function sortmaybe(refs,links) {
     //# Of results
     count = refs.length;
@@ -25,6 +27,7 @@ function sortmaybe(refs,links) {
         if (i==count-1){
             setTimeout(() => {
                 displayRankedResults();
+                document.getElementById("postToSefaria").style.display = "block";
             }, 200);
         }
     }
@@ -48,6 +51,7 @@ function orderResultsByLinkCount() {
     result = [];
 }
 
+//Called second
 function getLinkCounts(ref,option, count) {
     var jqxhr = jQuery.getJSON( "https://www.sefaria.org/api/links/" + ref, function(data) {
         var tempLink = jqxhr.responseJSON;
