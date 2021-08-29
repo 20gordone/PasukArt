@@ -66,7 +66,7 @@ function makeSheetAPICall(JSONtext){
     var key = "gQVZ8Zz6Bqvxg66W0kEVJbd0I6i2on2BnYuGNlnKpP";
     finalJSON = {'json':JSONtext,'apikey': "gQVZ8Zz6Bqvxg66W0kEVJbd0I6i2on2BnYuGNlnKpP"}
     
-    var postCall = jQuery.post( "https://www.sefaria.org/api/sheets", finalJSON, function( data ) {
+    var postCall = jQuery.post( "https://www.sefaria.org/api/sheets/", finalJSON, function( data ) {
         console.log("In function");
       })
     .done(function( data ) {

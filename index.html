@@ -223,7 +223,8 @@ Enter your name or the first and last letters below.
 </div>
 </div>
 <div class="smallertext">
-    <button id="save" class="brownfill bb">Search Verses</button><p id = "searching"></p>
+    <button id="save" class="brownfill bb">Search Verses</button><button id="postToSefaria" class="brownfill bb" style = " width: 250px; display: inline;" onclick="pullText(document.getElementById('versesdropdown').innerHTML.split(','))">Save To Sefaria</button>
+    <p id = "searching"></p>
     <div id="loadbar"></div>
     <div id="vary">
     </div>
@@ -241,6 +242,7 @@ Try including Pirkei Avot: <input type="checkbox" id="1Pirkei Avot" name="Pirkei
 <script src="AccordianManagement.js"></script>
 <script src="RankResults.js"></script>
 <script src="MakeSourceSheet.js"></script>
+<script src="PostSourceSheet.js"></script>
 </div>
 
     <div class="summary">
