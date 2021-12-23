@@ -68,14 +68,15 @@ function resultreaction(){
         var psukim = document.getElementById("versesdropdown");
         var resultCount = psukim.children.length;
         if (resultCount == 1) {
-            item.innerHTML += "<br> <p id=\"countresults\"> Sorry, there was only one result. I hope it's a good one! It should appear below shortly.</p>"
+            item.innerHTML += "<br> <p id=\"countresults\"> There was one result. It should appear below shortly.</p>"
 //            document.getElementById("versesdropdown").title = document.getElementById("versesdropdown").children[0].title
         }
         if (resultCount > 1){
-            item.innerHTML += "<p id=\"countresults\"> There were a whopping " + String(resultCount) + " results! Yay! The text should appear below shortly.</p>"
+            item.innerHTML += "<p id=\"countresults\"> There were " + String(resultCount) + " results. The text should appear below shortly.</p>"
             orderResultsByLinkCount();
         }
     }
+    //There are 8 results. The text should appear below shortly.
     document.getElementById("includePA").hidden = false;
     document.getElementById("save").disabled = false;
     document.getElementById("names").disabled = false;
