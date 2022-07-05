@@ -106,7 +106,7 @@ function stripFormattingEn(source){
         return source //The string doesn't have in-line commentary
     }
     else {
-        return source.substring(0, source,indexOf("<")) + source.substring(source.lastIndexOf(">")+1,source.length)
+        return source.substring(0, source.indexOf("<")) + source.substring(source.lastIndexOf(">")+1,source.length)
     }
 
 }
