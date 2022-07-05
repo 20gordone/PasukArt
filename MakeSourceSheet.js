@@ -30,11 +30,11 @@ function addVerseToPageDisplay(ref,listArea, rankNum) {
 
         //Get the actual texts in both languages
         var heText = temp.he[verseNum-1];
-        var enText = temp.text[verseNum-1];
+        var enText = stripFormattingEn(temp.text[verseNum-1]);
 
         //This is a very messy format
         if (heText.includes("<")){
-            listArea.children[rankNum].innerHTML += ref + "    " + stripFormatting(heText) + "<br>" + enText + "<br><br>";
+            listArea.children[rankNum].innerHTML += ref + "    " + stripFormattingHe(heText) + "<br>" + enText + "<br><br>";
         }
         else{
             listArea.children[rankNum].innerHTML += ref + "    " + heText + "<br>" + enText + "<br><br>";
@@ -47,8 +47,8 @@ function addVerseToPageDisplay(ref,listArea, rankNum) {
 //For typo/corrections in the text, the format is:
 //"לָ֤מָּה תָשִׁ֣יב יָ֭דְךָ וִימִינֶ֑ךָ מִקֶּ֖רֶב <span class="mam-kq"><span class="mam-kq-k">(חוקך)</span> <span class="mam-kq-q">[חֵיקְךָ֣]</span></span> כַלֵּֽה׃"
 
-//These next two functions enable on-site rendering of verses (removing extra formatting)
-function stripFormatting(source){
+//These next two functions enable on-site rendering of Hebrew verses (removing extra formatting)
+function stripFormattingHe(source){
     if (source.indexOf("kq")>-1){
         return stripFormattingWithTypo(source);
     }
@@ -101,3 +101,12 @@ function stripFormattingWithTypo(source){
 }
 sourceArray = new Array();
 
+function stripFormattingEn(source){
+    if (!source.includes("<")){
+        return source //The string doesn't have in-line commentary
+    }
+    else {
+        return source.substring(0, source,indexOf("<")) + source.substring(source.lastIndexOf(">")+1,source.length)
+    }
+
+}
